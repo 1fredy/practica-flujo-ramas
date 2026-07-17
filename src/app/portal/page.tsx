@@ -27,7 +27,7 @@ export default function PortalPage() {
           <strong>Valhalla</strong>
           <em>Fredy</em>
         </h1>
-        <p className="valhalla-copy">El portal está estable. Tu aventura interdimensional comienza ahora.</p>
+        <p className="valhalla-copy">Tu aventura interdimensional comienza ahora.</p>
       </section>
     </main>
   );
