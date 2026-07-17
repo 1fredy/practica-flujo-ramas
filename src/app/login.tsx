@@ -8,24 +8,38 @@ export default function Login() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
-  const [email, setEmail] = useState("aldair@gmail.com");
-  const [password, setPassword] = useState("1234");
+  const [usuario, setUsuario] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
-
-    if (email !== "aldair@gmail.com" || password !== "1234") {
-      setError("Correo o contraseña incorrectos.");
-      return;
-    }
-
     setStatus("loading");
-    window.setTimeout(() => {
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ usuario, password }),
+      });
+
+      const data = (await response.json()) as { message?: string };
+
+      if (!response.ok) {
+        setError(data.message ?? "No se pudo iniciar sesión.");
+        setStatus("idle");
+        return;
+      }
+
       setStatus("success");
       window.setTimeout(() => router.push("/portal"), 450);
-    }, 900);
+    } catch {
+      setError("No se pudo conectar con el servidor. Inténtalo nuevamente.");
+      setStatus("idle");
+    }
   }
 
   return (
@@ -40,10 +54,10 @@ export default function Login() {
           <p>Tu próxima aventura interdimensional está a un inicio de sesión de distancia.</p>
         </div>
         <form className="login-form" onSubmit={handleSubmit}>
-          <label htmlFor="email">Correo electrónico</label>
+          <label htmlFor="usuario">Usuario</label>
           <div className="field">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6" /></svg>
-            <input id="email" name="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="aldair@gmail.com" autoComplete="email" required />
+            <input id="usuario" name="usuario" type="text" value={usuario} onChange={(event) => setUsuario(event.target.value)} placeholder="Escribe tu usuario" autoComplete="username" required />
           </div>
           <div className="label-row"><label htmlFor="password">Contraseña</label><button type="button" className="text-button">¿Olvidaste tu contraseña?</button></div>
           <div className="field">
