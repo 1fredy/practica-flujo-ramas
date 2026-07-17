@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import portalBackground from "../../../public/assets/portal-valhalla.png";
 
 export const metadata = {
   title: "Valhalla | Portal Access",
@@ -8,6 +10,17 @@ export const metadata = {
 export default function PortalPage() {
   return (
     <main className="valhalla-page">
+      <Image
+        className="valhalla-background"
+        src={portalBackground}
+        alt=""
+        fill
+        priority
+        placeholder="blur"
+        quality={72}
+        sizes="100vw"
+        aria-hidden="true"
+      />
       <div className="valhalla-overlay" aria-hidden="true" />
       <div className="valhalla-particles" aria-hidden="true" />
 
