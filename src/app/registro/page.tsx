@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 
 type FormErrors = {
   nombre?: string;
@@ -56,6 +57,9 @@ export default function RegistroPage() {
   return (
     <main className="flex min-h-[calc(100vh-73px)] items-center justify-center bg-gray-100 px-4 py-10">
       <section className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
+        <Link href="/" className="mb-5 inline-flex text-sm font-semibold text-blue-600 hover:text-blue-800">
+          ← Volver al inicio
+        </Link>
         <h1 className="text-center text-3xl font-bold text-gray-900">
           Crear cuenta
         </h1>
@@ -168,6 +172,12 @@ export default function RegistroPage() {
             Registrarme
           </button>
         </form>
+        <p className="mt-6 text-center text-sm text-gray-600">
+          ¿Ya tienes una cuenta?{" "}
+          <Link href="/login" className="font-semibold text-blue-600 hover:text-blue-800">
+            Inicia sesión
+          </Link>
+        </p>
       </section>
     </main>
   );

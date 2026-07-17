@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,7 +17,8 @@ export default function Login() {
     <main className="login-page">
       <div className="space-dust" aria-hidden="true" />
       <section className="login-shell" aria-label="Inicio de sesión">
-        <div className="brand" aria-label="Portal Access"><span className="brand-mark">P</span><span>PORTAL <b>ACCESS</b></span></div>
+        <Link className="back-home" href="/">← Volver al inicio</Link>
+        <Link className="brand" href="/" aria-label="Volver a la página principal"><span className="brand-mark">P</span><span>PORTAL <b>ACCESS</b></span></Link>
         <div className="login-copy">
           <span className="eyebrow"><i /> C-137 SECURE NETWORK</span>
           <h1>Bienvenido de<br />vuelta, <em>viajero.</em></h1>
@@ -41,7 +43,7 @@ export default function Login() {
             {status === "success" && <>¡Acceso concedido! <span>✓</span></>}
           </button>
         </form>
-        <p className="signup">¿Nuevo en esta dimensión? <button type="button">Crear una cuenta</button></p>
+        <p className="signup">¿Nuevo en esta dimensión? <Link href="/registro">Crear una cuenta</Link></p>
         <p className="security"><span>✦</span> CONEXIÓN CIFRADA · FEDERACIÓN GALÁCTICA</p>
       </section>
       <div className="portal-label" aria-hidden="true"><span>∞</span><b>PORTAL ESTABLE</b><small>DIMENSIÓN C-137</small></div>
